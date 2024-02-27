@@ -1,5 +1,5 @@
 from django.contrib import admin
-from user.models import User, Add_Appointment
+from user.models import User, Add_Appointment, Add_Event
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Register your models here.
@@ -24,3 +24,4 @@ class UserModelAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserModelAdmin)
 admin.site.register(Add_Appointment)
+admin.site.register(Add_Event)

@@ -72,3 +72,14 @@ class Add_Appointment(models.Model):
 
     def __str__(self) -> str:
         return f"{self.Title}" or f'Appointment - {self.pk}'
+    
+
+
+class Add_Event(models.Model):
+    Title = models.CharField(max_length=100, default='Default Title')
+    Add_Address = models.TextField()
+    Date = models.DateField()  
+    Time = models.TimeField()
+
+    def __str__(self) -> str:
+        return f"{self.Title}" or f'Event - {self.pk}'

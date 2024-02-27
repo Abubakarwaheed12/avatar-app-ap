@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from user.models import User, Add_Appointment
+from user.models import User, Add_Appointment, Add_Event
 
 
+# User registration
 class UserRegisterationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -17,21 +18,14 @@ class UserRegisterationSerializer(serializers.ModelSerializer):
         return User.objects.create_user(**data)
     
    
-    
+    # User Login
 class UserLoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length=255)
     class Meta:
         model = User
         fields = ['email', 'password']
 
-
-class AddAppointmentSerial(serializers.ModelSerializer):
-    class Meta:
-        model = Add_Appointment
-        fields = '__all__'
-
-
-
+# User profile update 
 class UserProfileSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     confirm_password = serializers.CharField(write_only=True, required=False)
@@ -63,3 +57,16 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
+#  Add Appointment
+class AddAppointmentSerial(serializers.ModelSerializer):
+    class Meta:
+        model = Add_Appointment
+        fields = '__all__'
+
+# Add Event
+class AddEventSerial(serializers.ModelSerializer):
+    class Meta:
+        model = Add_Event
+        fields = '__all__'
+
