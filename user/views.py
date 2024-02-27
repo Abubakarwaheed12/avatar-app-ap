@@ -6,8 +6,9 @@ from django.contrib.auth import authenticate
 from user.renderers import UserRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Add_Appointment
-from .serializers import AddAppointmentSerial
-
+from .serializers import AddAppointmentSerial, UserProfileSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics
 
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
@@ -63,7 +64,16 @@ class UserLoginView(APIView):
                     'errors': {'non_field_errors':['Email or Password is not valid']}
                 }, status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
     
+
 class AddAppointmentView(APIView):
     def get(self, request):
         shop_details = Add_Appointment.objects.all()

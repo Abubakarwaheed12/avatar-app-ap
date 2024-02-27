@@ -38,6 +38,7 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=255, verbose_name='First Name')
     last_name = models.CharField(max_length=255, verbose_name='Last Name')
     phone = models.CharField(max_length=255, verbose_name='Phone')
+    image = models.ImageField(upload_to='user_images/', null=True, blank=True)  
     tc = models.BooleanField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

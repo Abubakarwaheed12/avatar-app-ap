@@ -5,7 +5,7 @@ from user.models import User, Add_Appointment
 class UserRegisterationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'phone', 'tc', 'password']
+        fields = ['email', 'first_name', 'last_name', 'phone', 'tc', 'password', 'image']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -29,3 +29,9 @@ class AddAppointmentSerial(serializers.ModelSerializer):
     class Meta:
         model = Add_Appointment
         fields = '__all__'
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'phone', 'image']
