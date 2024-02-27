@@ -29,3 +29,9 @@ class AddAppointmentSerial(serializers.ModelSerializer):
     class Meta:
         model = Add_Appointment
         fields = '__all__'
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'phone', 'tc']
