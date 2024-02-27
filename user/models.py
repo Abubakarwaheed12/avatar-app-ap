@@ -69,3 +69,6 @@ class Add_Appointment(models.Model):
     Add_Address = models.TextField()
     Date = models.DateField()  
     Time = models.TimeField()
+
+    def __str__(self) -> str:
+        return f"{self.Title}" or f'Appointment - {self.pk}'
