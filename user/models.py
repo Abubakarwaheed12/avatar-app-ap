@@ -73,13 +73,37 @@ class Add_Appointment(models.Model):
     def __str__(self) -> str:
         return f"{self.Title}" or f'Appointment - {self.pk}'
     
+    class Meta:
+        verbose_name = 'Appointment'
+        verbose_name_plural = 'Appointments'
+    
 
 
 class Add_Event(models.Model):
     Title = models.CharField(max_length=100, default='Default Title')
     Add_Address = models.TextField()
+    type = models.CharField(max_length=100, default='appointment')
     Date = models.DateField()  
     Time = models.TimeField()
 
     def __str__(self) -> str:
         return f"{self.Title}" or f'Event - {self.pk}'
+    
+    class Meta:
+        verbose_name = 'Event'
+        verbose_name_plural = 'Events'
+    
+
+class Quick_Plan(models.Model):
+    Title = models.CharField(max_length=100, default='Default Title')
+    Add_Address = models.TextField()
+    Date = models.DateField()  
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    def __str__(self) -> str:
+        return f"{self.Title}" or f'Quick Plan - {self.pk}'
+    
+    class Meta:
+        verbose_name = 'Quick Plan'
+        verbose_name_plural = 'Quick Plans'

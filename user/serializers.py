@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from user.models import User, Add_Appointment, Add_Event
+from user.models import User, Add_Appointment, Add_Event, Quick_Plan
 
 
 # User registration
@@ -70,3 +70,8 @@ class AddEventSerial(serializers.ModelSerializer):
         model = Add_Event
         fields = '__all__'
 
+#Quick Plan
+class QuickPlanSerial(serializers.ModelSerializer):
+    class Meta:
+        model = Quick_Plan
+        fields = ["id", "Title", "Add_Address", "Date", "start_time", "end_time"]

@@ -6,9 +6,11 @@ from django.contrib.auth import authenticate
 from user.renderers import UserRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Add_Appointment, Add_Event
-from .serializers import AddAppointmentSerial, UserProfileSerializer, AddEventSerial
+from .serializers import AddAppointmentSerial, UserProfileSerializer, AddEventSerial, QuickPlanSerial
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
+from datetime import date
+from user.models import Quick_Plan
 
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
@@ -144,3 +146,18 @@ class DeleteEvent(APIView):
 
         appointment.delete()
         return Response({"message": "Event deleted successfully"}, status=status.HTTP_204_NO_CONTENT)    
+    
+# QUICK PLAN
+class QuickPlanView(APIView):
+    def get(self, request):
+        shop_details = Quick_Plan.objects.filter(Date=date.today()).order_by('start_time')
+        serializer = QuickPlanSerial(shop_details, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        serializer = QuickPlanSerial(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

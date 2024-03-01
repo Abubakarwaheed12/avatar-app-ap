@@ -1,5 +1,5 @@
 from django.urls import path
-from user.views import UserRegisterationView, UserLoginView , AddAppointmentView,GetAppointmentByDate,DeleteAppointment, UserProfileView, AddEventView, GetEventByDate, DeleteEvent
+from user.views import UserRegisterationView, UserLoginView , AddAppointmentView,GetAppointmentByDate,DeleteAppointment, UserProfileView, AddEventView, GetEventByDate, DeleteEvent, QuickPlanView
 
 urlpatterns = [
     path('register/', UserRegisterationView.as_view(), name='register'),
@@ -11,5 +11,5 @@ urlpatterns = [
     path('AddEvent/', AddEventView.as_view(), name='AddEventView'),
     path('AddEvent/<str:date>/', GetEventByDate.as_view(), name='get_Event_by_date'),
     path('delete_Event/<int:id>/', DeleteEvent.as_view(), name='delete_Event'),
-
+    path('QuickPlan/', QuickPlanView.as_view(), name='QuickPlanView'),
 ]
