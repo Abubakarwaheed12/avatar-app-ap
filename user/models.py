@@ -82,7 +82,6 @@ class Add_Appointment(models.Model):
 class Add_Event(models.Model):
     Title = models.CharField(max_length=100, default='Default Title')
     Add_Address = models.TextField()
-    type = models.CharField(max_length=100, default='appointment')
     Date = models.DateField()  
     Time = models.TimeField()
 
@@ -98,6 +97,7 @@ class Quick_Plan(models.Model):
     Title = models.CharField(max_length=100, default='Default Title')
     Add_Address = models.TextField()
     Date = models.DateField()  
+    type = models.CharField(max_length=100, default='appointment')
     start_time = models.TimeField()
     end_time = models.TimeField()
 

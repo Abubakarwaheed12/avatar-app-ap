@@ -74,4 +74,4 @@ class AddEventSerial(serializers.ModelSerializer):
 class QuickPlanSerial(serializers.ModelSerializer):
     class Meta:
         model = Quick_Plan
-        fields = ["id", "Title", "Add_Address", "Date", "start_time", "end_time"]
+        fields = ["id", "Title", "Add_Address", "type", "Date", "start_time", "end_time"]
