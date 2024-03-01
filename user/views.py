@@ -79,12 +79,15 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
 # APPOINTMENT
     
 class AddAppointmentView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         shop_details = Add_Appointment.objects.all()
         serializer = AddAppointmentSerial(shop_details, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
+
         serializer = AddAppointmentSerial(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -102,6 +105,7 @@ class GetAppointmentByDate(APIView):
 
     
 class DeleteAppointment(APIView):
+    permission_classes = [IsAuthenticated]
     def delete(self, request, id):
         try:
             appointment = Add_Appointment.objects.get(id=id)
@@ -115,6 +119,7 @@ class DeleteAppointment(APIView):
 # EVENT
 
 class AddEventView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         shop_details = Add_Event.objects.all()
         serializer = AddEventSerial(shop_details, many=True)
@@ -129,6 +134,7 @@ class AddEventView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 class GetEventByDate(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request, date):
         appointments = Add_Event.objects.filter(Date=date)
         serializer = AddEventSerial(appointments, many=True)
@@ -138,6 +144,7 @@ class GetEventByDate(APIView):
 
     
 class DeleteEvent(APIView):
+    permission_classes = [IsAuthenticated]
     def delete(self, request, id):
         try:
             appointment = Add_Event.objects.get(id=id)
@@ -149,6 +156,7 @@ class DeleteEvent(APIView):
     
 # QUICK PLAN
 class QuickPlanView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         shop_details = Quick_Plan.objects.filter(Date=date.today()).order_by('start_time')
         serializer = QuickPlanSerial(shop_details, many=True)
